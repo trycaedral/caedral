@@ -43,11 +43,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/caedral/caedral.git"
+    "url": "git+https://github.com/trycaedral/caedral.git"
   },
   "homepage": "https://caedral.com/docs/typescript",
   "bugs": {
-    "url": "https://github.com/caedral/caedral/issues"
+    "url": "https://github.com/trycaedral/caedral/issues"
   },
   "scripts": {
     "build": "tsup",
