@@ -1,4 +1,5 @@
 import { spawn, type ChildProcess } from "node:child_process";
+import { existsSync } from "node:fs";
 import { config } from "dotenv";
 import { resolve } from "node:path";
 
@@ -47,11 +48,20 @@ function stopGatewayProcess() {
 }
 
 export default async function globalSetup() {
+  // Package CI / publish: no monorepo gateway available.
+  if (process.env.CI === "true" || process.env.SKIP_GATEWAY === "1") {
+    return async () => {};
+  }
+
   if (await isGatewayHealthy()) {
     return async () => {};
   }
 
   const gatewayDir = resolve(process.cwd(), "../api-gateway");
+  if (!existsSync(gatewayDir)) {
+    return async () => {};
+  }
+
   const npmCmd = process.platform === "win32" ? "npm.cmd" : "npm";
 
   gatewayProcess = spawn(npmCmd, ["run", "dev"], {
