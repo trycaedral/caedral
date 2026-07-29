@@ -1,6 +1,6 @@
 # Caedral SDK
 
-Official TypeScript/JavaScript client for the [Caedral API](https://caedral.com). OpenAI-compatible shape — point your existing code at Caedral with minimal changes.
+Official TypeScript/JavaScript client for the [Caedral API](https://caedral.com) (**v1.0.0**). OpenAI-compatible shape — point your existing code at Caedral with minimal changes.
 
 ## Installation
 
