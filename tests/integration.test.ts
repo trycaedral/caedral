@@ -4,8 +4,10 @@ import { createTestApiKey, type TestKeyFixture } from "./helpers.js";
 import { hasLiveOpenRouter } from "./setup.js";
 
 const BASE_URL = process.env.CAEDRAL_BASE_URL ?? "http://localhost:5001";
+const canRunIntegration =
+  !!process.env.CAEDRAL_TEST_API_KEY || !!process.env.DATABASE_URL;
 
-describe("Caedral SDK integration", () => {
+describe.skipIf(!canRunIntegration)("Caedral SDK integration", () => {
   let fixture: TestKeyFixture | undefined;
   let client: Caedral;
 
