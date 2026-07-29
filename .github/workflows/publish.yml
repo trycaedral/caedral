@@ -3,6 +3,7 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
 permissions:
   id-token: write
   contents: read
@@ -16,8 +17,13 @@ jobs:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
-      - run: npm test
+      - name: Test
+        run: npm test
+        env:
+          CI: true
+          SKIP_GATEWAY: '1'
       - run: npm run build
-      - run: npm publish --provenance --access public
+      - name: Publish to npm
+        run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
