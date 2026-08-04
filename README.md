@@ -115,15 +115,24 @@ console.log("Overage used:", usage.overage.usedCents);
 
 ### `caedral.embeddings.create(params)`
 
-Generate vector embeddings (model `caedral-embed`).
+Generate vector embeddings with **Caedral E1 Small** (`caedral-embed-e1-small-v1`, native **384** dimensions). Model and dimensions default when omitted.
 
 ```typescript
 const result = await caedral.embeddings.create({
-  model: "caedral-embed",
   input: ["Caedral routes frontier models through one API"],
 });
 
-console.log(result.data[0]?.embedding.length);
+console.log(result.data[0]?.embedding.length); // 384
+```
+
+Explicit model and dimensions:
+
+```typescript
+const result = await caedral.embeddings.create({
+  model: "caedral-embed-e1-small-v1",
+  dimensions: 384,
+  input: "query: semantic search text",
+});
 ```
 
 ### `caedral.images.generate(params)`

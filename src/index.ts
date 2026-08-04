@@ -15,6 +15,8 @@ export type {
   CompletionUsage,
   EmbeddingCreateParams,
   EmbeddingCreateResponse,
+  EmbeddingDimensions,
+  EmbeddingModel,
   ImageGenerateParams,
   ImageGenerateResponse,
   Model,

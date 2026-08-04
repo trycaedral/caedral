@@ -1,3 +1,9 @@
+import {
+  assertEmbeddingDimensions,
+  assertEmbeddingModel,
+  DEFAULT_EMBEDDING_DIMENSIONS,
+  DEFAULT_EMBEDDING_MODEL,
+} from "../embeddings/constants.js";
 import { HttpClient } from "../http.js";
 import type {
   EmbeddingCreateParams,
@@ -11,16 +17,19 @@ export class EmbeddingsResource {
   constructor(private readonly http: HttpClient) {}
 
   /**
-   * Generate dense vector embeddings for one or more input strings.
-   *
-   * @param params - Embedding request specifying the model and input
-   *   text(s). `input` can be a single string or an array of strings
-   *   to batch multiple inputs in one request.
-   * @returns The response containing an array of embedding vectors
-   *   in the same order as the inputs, plus token usage.
-   * @throws {CaedralAPIError} If the API returns a non-2xx response.
+   * Generate dense vector embeddings. Defaults to Caedral E1 Small (384D).
    */
-  async create(params: EmbeddingCreateParams): Promise<EmbeddingCreateResponse> {
-    return this.http.postJson<EmbeddingCreateResponse>("/v1/embeddings", params);
+  async create(
+    params: EmbeddingCreateParams,
+  ): Promise<EmbeddingCreateResponse> {
+    const model = assertEmbeddingModel(params.model ?? DEFAULT_EMBEDDING_MODEL);
+    const dimensions = assertEmbeddingDimensions(
+      params.dimensions ?? DEFAULT_EMBEDDING_DIMENSIONS,
+    );
+    return this.http.postJson<EmbeddingCreateResponse>("/v1/embeddings", {
+      ...params,
+      model,
+      dimensions,
+    });
   }
 }

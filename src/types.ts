@@ -123,13 +123,16 @@ export type ApiErrorType =
 
 export type SpecializedModelId =
   | "caedral-vision"
-  | "caedral-embed"
   | "caedral-voice"
   | "caedral-rerank";
 
+export type EmbeddingModel = "caedral-embed-e1-small-v1";
+export type EmbeddingDimensions = 384;
+
 export type EmbeddingCreateParams = {
-  model: SpecializedModelId | (string & {});
   input: string | string[];
+  model?: EmbeddingModel;
+  dimensions?: EmbeddingDimensions;
 };
 
 export type EmbeddingCreateResponse = {
