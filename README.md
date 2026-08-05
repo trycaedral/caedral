@@ -115,7 +115,7 @@ console.log("Overage used:", usage.overage.usedCents);
 
 ### `caedral.embeddings.create(params)`
 
-Generate vector embeddings with **Caedral E1 Small** (`caedral-embed-e1-small-v1`, native **384** dimensions). Model and dimensions default when omitted.
+Generate vector embeddings with **Caedral E1 Small** (canonical `caedral-embed-e1-small-v1`, legacy prepaid alias `caedral-embed`, native **384** dimensions). Model and dimensions default when omitted.
 
 ```typescript
 const result = await caedral.embeddings.create({
@@ -125,15 +125,26 @@ const result = await caedral.embeddings.create({
 console.log(result.data[0]?.embedding.length); // 384
 ```
 
-Explicit model and dimensions:
+Explicit model, dimensions, and OpenRouter-compatible retrieval hints:
 
 ```typescript
-const result = await caedral.embeddings.create({
+const query = await caedral.embeddings.create({
   model: "caedral-embed-e1-small-v1",
   dimensions: 384,
-  input: "query: semantic search text",
+  input: "semantic search text",
+  input_type: "search_query",
+  encoding_format: "float",
+});
+
+const document = await caedral.embeddings.create({
+  model: "caedral-embed",
+  input: "indexed passage text",
+  input_type: "search_document",
+  encoding_format: "base64",
 });
 ```
+
+`input_type` accepts `search_query`, `query`, `search_document`, `document`, and `passage`. `encoding_format` accepts `float` or `base64` when supported by the API.
 
 ### `caedral.images.generate(params)`
 
@@ -222,6 +233,8 @@ import type {
   ChatCompletionChunk,
   ChatCompletionCreateParams,
   EmbeddingCreateParams,
+  EmbeddingEncodingFormat,
+  EmbeddingInputType,
   ImageGenerateParams,
   AudioGenerateParams,
   RerankCreateParams,
