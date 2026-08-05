@@ -126,13 +126,22 @@ export type SpecializedModelId =
   | "caedral-voice"
   | "caedral-rerank";
 
-export type EmbeddingModel = "caedral-embed-e1-small-v1";
+export type EmbeddingModel = "caedral-embed-e1-small-v1" | "caedral-embed";
 export type EmbeddingDimensions = 384;
+export type EmbeddingInputType =
+  | "search_query"
+  | "query"
+  | "search_document"
+  | "document"
+  | "passage";
+export type EmbeddingEncodingFormat = "float" | "base64";
 
 export type EmbeddingCreateParams = {
   input: string | string[];
   model?: EmbeddingModel;
   dimensions?: EmbeddingDimensions;
+  input_type?: EmbeddingInputType;
+  encoding_format?: EmbeddingEncodingFormat;
 };
 
 export type EmbeddingCreateResponse = {

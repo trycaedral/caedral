@@ -16,6 +16,8 @@ export type {
   EmbeddingCreateParams,
   EmbeddingCreateResponse,
   EmbeddingDimensions,
+  EmbeddingEncodingFormat,
+  EmbeddingInputType,
   EmbeddingModel,
   ImageGenerateParams,
   ImageGenerateResponse,
