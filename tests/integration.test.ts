@@ -109,20 +109,11 @@ describe.skipIf(!canRunIntegration)("Caedral SDK integration", () => {
 
     expect(usage).toMatchObject({
       accountStatus: expect.any(String),
-      plan: expect.any(String),
-      planStatus: expect.any(String),
       balanceCents: expect.any(Number),
-      weeklyPool: {
-        limit: expect.any(Number),
-        used: expect.any(Number),
-        remaining: expect.any(Number),
-      },
-      overage: {
-        enabled: expect.any(Boolean),
-        usedCents: expect.any(Number),
-      },
-      balanceWeightedUnitsAffordable: expect.any(Number),
     });
+    expect(usage.balanceMilliCents === undefined || typeof usage.balanceMilliCents === "number").toBe(
+      true,
+    );
   });
 
   it("throws CaedralAPIError for invalid API key", async () => {

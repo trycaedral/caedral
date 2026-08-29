@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Align `UsageSummary` with prepaid `GET /v1/usage` (`balanceMilliCents`; plan/weeklyPool/overage optional)
+
 ## 2.1.0 — 2026-08-04
 
 - Add OpenRouter-ready embedding options: `input_type` and `encoding_format` on `EmbeddingCreateParams`

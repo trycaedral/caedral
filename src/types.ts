@@ -84,21 +84,24 @@ export type ModelListResponse = {
 
 export type UsageSummary = {
   accountStatus: string;
-  plan: string;
-  planStatus: string;
   balanceCents: number;
-  weeklyPool: {
+  /** Full-precision prepaid balance. Present on the current gateway. */
+  balanceMilliCents?: number;
+  balanceWeightedUnitsAffordable?: number;
+  /** Removed from GET /v1/usage; kept optional for older payloads. */
+  plan?: string;
+  planStatus?: string;
+  weeklyPool?: {
     limit: number;
     used: number;
     remaining: number;
   };
-  overage: {
+  overage?: {
     enabled: boolean;
     limitCents: number | null;
     usedCents: number;
     remainingCents: number | null;
   };
-  balanceWeightedUnitsAffordable: number;
 };
 
 export type CaedralClientOptions = {
