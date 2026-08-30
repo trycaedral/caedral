@@ -8,9 +8,8 @@ export class UsageResource {
   constructor(private readonly http: HttpClient) {}
 
   /**
-   * Fetch a snapshot of the authenticated account's current billing
-   * state: plan, weekly free pool utilization, prepaid balance, and
-   * overage limits.
+   * Fetch plan, included quota pools, and on-demand state
+   * (`accountStatus`, `plan`, `pools`, `onDemand`).
    *
    * @returns The current `UsageSummary` for the account.
    * @throws {CaedralAPIError} If the API returns a non-2xx response.
