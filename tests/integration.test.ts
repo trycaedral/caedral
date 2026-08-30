@@ -109,20 +109,13 @@ describe.skipIf(!canRunIntegration)("Caedral SDK integration", () => {
 
     expect(usage).toMatchObject({
       accountStatus: expect.any(String),
-      plan: expect.any(String),
-      planStatus: expect.any(String),
-      balanceCents: expect.any(Number),
-      weeklyPool: {
-        limit: expect.any(Number),
-        used: expect.any(Number),
-        remaining: expect.any(Number),
-      },
-      overage: {
-        enabled: expect.any(Boolean),
-        usedCents: expect.any(Number),
-      },
-      balanceWeightedUnitsAffordable: expect.any(Number),
+      plan: expect.objectContaining({ id: expect.any(String) }),
+      pools: expect.objectContaining({
+        caedral: expect.any(Object),
+        external: expect.any(Object),
+      }),
     });
+    expect(usage).not.toHaveProperty("balanceCents");
   });
 
   it("throws CaedralAPIError for invalid API key", async () => {

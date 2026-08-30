@@ -82,23 +82,46 @@ export type ModelListResponse = {
   data: Model[];
 };
 
+export type UsagePool = {
+  usedMilli: number;
+  limitMilli: number;
+  usedFormatted?: string;
+  limitFormatted?: string;
+  percentUsed: number;
+  available: boolean;
+};
+
 export type UsageSummary = {
   accountStatus: string;
-  plan: string;
-  planStatus: string;
-  balanceCents: number;
-  weeklyPool: {
-    limit: number;
-    used: number;
-    remaining: number;
+  plan: {
+    id: string;
+    name: string;
+    interval: string;
+    status: string;
+    priceCents?: number;
   };
-  overage: {
-    enabled: boolean;
-    limitCents: number | null;
-    usedCents: number;
-    remainingCents: number | null;
+  billingPeriod?: {
+    start: string | null;
+    end: string | null;
   };
-  balanceWeightedUnitsAffordable: number;
+  pools: {
+    caedral: UsagePool;
+    external: UsagePool;
+  };
+  onDemand: {
+    mode: string;
+    allowed: boolean;
+    blocked?: boolean;
+    enabled?: boolean;
+    accruedMilli: number;
+    spentMilli?: number;
+    accruedFormatted?: string;
+    spentFormatted?: string;
+  };
+  quota?: {
+    caedralRemainingMilli: number;
+    externalRemainingMilli: number;
+  };
 };
 
 export type CaedralClientOptions = {
@@ -116,6 +139,8 @@ export type CaedralClientOptions = {
 export type ApiErrorType =
   | "invalid_api_key"
   | "insufficient_balance"
+  | "quota_exceeded"
+  | "account_suspended"
   | "invalid_request"
   | "rate_limit_exceeded"
   | "upstream_error"

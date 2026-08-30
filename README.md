@@ -103,14 +103,14 @@ for (const model of models) {
 
 ### `caedral.usage.get()`
 
-Current account usage: weekly pool, balance, overage.
+Current plan, included quota, and on-demand state.
 
 ```typescript
 const usage = await caedral.usage.get();
 
-console.log("Pool remaining:", usage.weeklyPool.remaining);
-console.log("Balance (cents):", usage.balanceCents);
-console.log("Overage used:", usage.overage.usedCents);
+console.log("Status:", usage.accountStatus);
+console.log("Plan:", usage.plan.id, usage.plan.status);
+console.log("Caedral pool %:", usage.pools.caedral.percentUsed);
 ```
 
 ### `caedral.embeddings.create(params)`
