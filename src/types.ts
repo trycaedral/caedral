@@ -12,6 +12,13 @@ export type ChatCompletionMessageParam = {
   name?: string;
 };
 
+export type NotrePublicMode = 'off' | 'auto';
+
+export type NotreOptions = {
+  mode?: NotrePublicMode;
+  telemetry?: boolean;
+};
+
 export type ChatCompletionCreateParams = {
   model: CaedralModelId | (string & {});
   messages: ChatCompletionMessageParam[];
@@ -23,6 +30,8 @@ export type ChatCompletionCreateParams = {
   presence_penalty?: number;
   stop?: string | string[];
   user?: string;
+  /** Optional Notre platform optimization (additive; omit for existing behavior). */
+  notre?: NotreOptions;
 };
 
 export type ChatCompletionChoice = {
