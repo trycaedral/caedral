@@ -1,5 +1,14 @@
 # Changelog
 
+## [Unreleased] — 2.2.0 (Notre V1 — prepare only, not published)
+
+- Add optional `notre` request field (`mode: "off" | "auto"`, `telemetry?: boolean`) on chat completions
+- Add optional `notre` response metadata (`enabled`, `mode`, `intervened`, `fallback_used`) when `telemetry: true`
+- Export `NotreOptions`, `NotrePublicMetadata`, `NotrePublicMode` types
+- Golden contract parity tests (`tests/notre-contract.test.ts`)
+
+**SemVer:** minor (additive, backward compatible — omitting `notre` preserves existing behavior).
+
 ## 2.1.0 — 2026-08-04
 
 - Add OpenRouter-ready embedding options: `input_type` and `encoding_format` on `EmbeddingCreateParams`
