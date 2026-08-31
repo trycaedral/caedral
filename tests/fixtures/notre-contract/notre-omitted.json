@@ -1,0 +1,6 @@
+{
+  "model": "caedral-base",
+  "messages": [
+    { "role": "user", "content": "Hello" }
+  ]
+}

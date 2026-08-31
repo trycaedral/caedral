@@ -1,0 +1,10 @@
+{
+  "model": "caedral-base",
+  "messages": [
+    { "role": "user", "content": "Hello" }
+  ],
+  "notre": {
+    "mode": "auto",
+    "telemetry": true
+  }
+}

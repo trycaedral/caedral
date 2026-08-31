@@ -19,6 +19,13 @@ export type NotreOptions = {
   telemetry?: boolean;
 };
 
+export type NotrePublicMetadata = {
+  enabled: boolean;
+  mode: NotrePublicMode | 'shadow';
+  intervened: boolean;
+  fallback_used: boolean;
+};
+
 export type ChatCompletionCreateParams = {
   model: CaedralModelId | (string & {});
   messages: ChatCompletionMessageParam[];
@@ -56,6 +63,8 @@ export type ChatCompletion = {
   model: string;
   choices: ChatCompletionChoice[];
   usage?: CompletionUsage;
+  /** Present when request included `notre.telemetry: true`. */
+  notre?: NotrePublicMetadata;
 };
 
 export type ChatCompletionChunkChoice = {

@@ -1,0 +1,13 @@
+{
+  "notre_contract_version": 1,
+  "description": "Canonical Notre product contract golden fixtures",
+  "requests": {
+    "notre_omitted": "notre-omitted.json",
+    "notre_off": "notre-off.json",
+    "notre_auto": "notre-auto.json",
+    "notre_auto_telemetry": "notre-auto-telemetry.json"
+  },
+  "responses": {
+    "notre_response_telemetry": "notre-response-telemetry.json"
+  }
+}
