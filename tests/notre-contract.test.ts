@@ -71,4 +71,20 @@ describe('Notre contract parity (TypeScript SDK)', () => {
       expect(raw.notre.input_saved).toBe(raw.notre.input_before - raw.notre.input_sent);
     }
   });
+
+  it('deserializes response telemetry metadata V3 (shape + saved_breakdown)', () => {
+    const raw = JSON.parse(
+      fs.readFileSync(path.join(FIXTURES, 'notre-response-telemetry-v3.json'), 'utf8'),
+    ) as ChatCompletion;
+    expect(raw.notre?.shape).toBe('chat');
+    expect(raw.notre?.contract_version).toBe(3);
+    expect(raw.notre?.saved_breakdown).toEqual({
+      cache_hit_tokens: 640,
+      dedup_tokens: 20,
+      prefilter_tokens: 0,
+    });
+    if (raw.notre?.input_saved != null && raw.notre.input_before != null && raw.notre.input_sent != null) {
+      expect(raw.notre.input_saved).toBe(raw.notre.input_before - raw.notre.input_sent);
+    }
+  });
 });
