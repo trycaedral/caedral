@@ -1,6 +1,6 @@
 {
-  "notre_contract_version": 2,
-  "description": "Canonical Notre product contract golden fixtures (V2: optional economy block; V1 fixtures remain valid)",
+  "notre_contract_version": 3,
+  "description": "Canonical Notre product contract golden fixtures (V3: shape + saved_breakdown on top of V2 flat economy; V1/V2 fixtures remain valid)",
   "requests": {
     "notre_omitted": "notre-omitted.json",
     "notre_off": "notre-off.json",
@@ -9,6 +9,7 @@
   },
   "responses": {
     "notre_response_telemetry": "notre-response-telemetry.json",
-    "notre_response_telemetry_v2": "notre-response-telemetry-v2.json"
+    "notre_response_telemetry_v2": "notre-response-telemetry-v2.json",
+    "notre_response_telemetry_v3": "notre-response-telemetry-v3.json"
   }
 }

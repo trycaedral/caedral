@@ -29,6 +29,14 @@ export type NotrePublicMetadata = {
   input_saved?: number;
   value_usd?: number;
   result?: 'optimized' | 'no_gain' | 'fallback';
+  /** Contract V3 shape fields (embeddings/rerank economy). */
+  shape?: 'chat' | 'embeddings' | 'rerank';
+  contract_version?: number;
+  saved_breakdown?: {
+    cache_hit_tokens?: number;
+    dedup_tokens?: number;
+    prefilter_tokens?: number;
+  };
 };
 
 export type ChatCompletionCreateParams = {

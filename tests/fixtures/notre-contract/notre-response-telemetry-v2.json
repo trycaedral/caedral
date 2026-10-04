@@ -1,0 +1,29 @@
+{
+  "id": "chatcmpl-example-v2",
+  "object": "chat.completion",
+  "created": 1700000000,
+  "model": "caedral-base",
+  "choices": [
+    {
+      "index": 0,
+      "message": { "role": "assistant", "content": "Hello!" },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 10,
+    "completion_tokens": 5,
+    "total_tokens": 15
+  },
+  "notre": {
+    "enabled": true,
+    "mode": "auto",
+    "intervened": true,
+    "fallback_used": false,
+    "input_before": 1200,
+    "input_sent": 310,
+    "input_saved": 890,
+    "result": "optimized",
+    "value_usd": 0.00267
+  }
+}
