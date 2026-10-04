@@ -38,7 +38,7 @@ describe('Notre contract parity (TypeScript SDK)', () => {
     );
   });
 
-  it('deserializes response telemetry metadata V1', () => {
+  it('deserializes response telemetry metadata V1 (base fields only)', () => {
     const raw = JSON.parse(
       fs.readFileSync(path.join(FIXTURES, 'notre-response-telemetry.json'), 'utf8'),
     ) as ChatCompletion;
@@ -50,5 +50,25 @@ describe('Notre contract parity (TypeScript SDK)', () => {
     });
     expect(raw.notre).not.toHaveProperty('logical_tokens');
     expect(raw.notre).not.toHaveProperty('strategy_class');
+  });
+
+  it('deserializes response telemetry metadata V2 (flat economy fields)', () => {
+    const raw = JSON.parse(
+      fs.readFileSync(path.join(FIXTURES, 'notre-response-telemetry-v2.json'), 'utf8'),
+    ) as ChatCompletion;
+    expect(raw.notre).toEqual({
+      enabled: true,
+      mode: 'auto',
+      intervened: true,
+      fallback_used: false,
+      input_before: 1200,
+      input_sent: 310,
+      input_saved: 890,
+      result: 'optimized',
+      value_usd: 0.00267,
+    });
+    if (raw.notre?.input_saved != null && raw.notre.input_before != null && raw.notre.input_sent != null) {
+      expect(raw.notre.input_saved).toBe(raw.notre.input_before - raw.notre.input_sent);
+    }
   });
 });

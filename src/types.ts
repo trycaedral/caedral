@@ -24,6 +24,11 @@ export type NotrePublicMetadata = {
   mode: NotrePublicMode | 'shadow';
   intervened: boolean;
   fallback_used: boolean;
+  input_before?: number;
+  input_sent?: number;
+  input_saved?: number;
+  value_usd?: number;
+  result?: 'optimized' | 'no_gain' | 'fallback';
 };
 
 export type ChatCompletionCreateParams = {
@@ -63,7 +68,7 @@ export type ChatCompletion = {
   model: string;
   choices: ChatCompletionChoice[];
   usage?: CompletionUsage;
-  /** Present when request included `notre.telemetry: true`. */
+  /** Present when Notre ran on the request or `notre.telemetry` was true. */
   notre?: NotrePublicMetadata;
 };
 
@@ -82,6 +87,7 @@ export type ChatCompletionChunk = {
   created: number;
   model: string;
   choices: ChatCompletionChunkChoice[];
+  notre?: NotrePublicMetadata;
 };
 
 export type Model = {
