@@ -10,11 +10,34 @@ process.env.OPENROUTER_API_KEY ??= "sk-or-test-mock-key";
 
 const BASE_URL = process.env.CAEDRAL_BASE_URL;
 
+/** SSRF guard: the test gateway must be local or the production API host. */
+function isAllowedTestOrigin(raw: string | undefined): raw is string {
+  if (!raw) return false;
+  try {
+    const url = new URL(raw);
+    const host = url.hostname;
+    return (
+      (url.protocol === "http:" || url.protocol === "https:") &&
+      (host === "localhost" ||
+        host === "127.0.0.1" ||
+        host === "0.0.0.0" ||
+        host.endsWith(".caedral.com"))
+    );
+  } catch {
+    return false;
+  }
+}
+
+const GATEWAY_HEALTH_URL = isAllowedTestOrigin(BASE_URL)
+  ? new URL("/health", BASE_URL).href
+  : null;
+
 let gatewayProcess: ChildProcess | null = null;
 
 async function isGatewayHealthy(): Promise<boolean> {
+  if (!GATEWAY_HEALTH_URL) return false;
   try {
-    const res = await fetch(`${BASE_URL}/health`);
+    const res = await fetch(GATEWAY_HEALTH_URL);
     return res.ok;
   } catch {
     return false;

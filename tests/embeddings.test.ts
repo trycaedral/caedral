@@ -5,6 +5,10 @@ import { EmbeddingsResource } from "../src/resources/embeddings.js";
 import type { HttpClient as HttpClientType } from "../src/http.js";
 import type { ApiErrorBody } from "../src/types.js";
 
+/** Explicitly fake — unit tests never carry real credentials. */
+const FAKE_UNIT_TEST_KEY = "dummy-unit-test";
+
+
 function mockHttp(): HttpClientType {
   return {
     postJson: vi.fn().mockResolvedValue({
@@ -185,7 +189,7 @@ describe("EmbeddingsResource", () => {
   describe("API errors via HttpClient", () => {
     it("throws invalid_request (400)", async () => {
       const http = new HttpClient({
-        apiKey: "test-key",
+        apiKey: FAKE_UNIT_TEST_KEY,
         baseURL: "https://api.example.com",
         fetch: mockFetchResponse(
           400,
@@ -203,7 +207,7 @@ describe("EmbeddingsResource", () => {
 
     it("throws invalid_api_key (401)", async () => {
       const http = new HttpClient({
-        apiKey: "bad-key",
+        apiKey: FAKE_UNIT_TEST_KEY,
         baseURL: "https://api.example.com",
         fetch: mockFetchResponse(
           401,
@@ -221,7 +225,7 @@ describe("EmbeddingsResource", () => {
 
     it("throws insufficient_balance (402)", async () => {
       const http = new HttpClient({
-        apiKey: "test-key",
+        apiKey: FAKE_UNIT_TEST_KEY,
         baseURL: "https://api.example.com",
         fetch: mockFetchResponse(
           402,
@@ -239,7 +243,7 @@ describe("EmbeddingsResource", () => {
 
     it("throws rate_limit_exceeded (429)", async () => {
       const http = new HttpClient({
-        apiKey: "test-key",
+        apiKey: FAKE_UNIT_TEST_KEY,
         baseURL: "https://api.example.com",
         fetch: mockFetchResponse(
           429,
