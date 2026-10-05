@@ -1,0 +1,24 @@
+{
+  "id": "chatcmpl-example",
+  "object": "chat.completion",
+  "created": 1700000000,
+  "model": "caedral-base",
+  "choices": [
+    {
+      "index": 0,
+      "message": { "role": "assistant", "content": "Hello!" },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 10,
+    "completion_tokens": 5,
+    "total_tokens": 15
+  },
+  "notre": {
+    "enabled": true,
+    "mode": "auto",
+    "intervened": false,
+    "fallback_used": false
+  }
+}

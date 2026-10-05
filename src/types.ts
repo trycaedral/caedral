@@ -12,6 +12,33 @@ export type ChatCompletionMessageParam = {
   name?: string;
 };
 
+export type NotrePublicMode = 'off' | 'auto';
+
+export type NotreOptions = {
+  mode?: NotrePublicMode;
+  telemetry?: boolean;
+};
+
+export type NotrePublicMetadata = {
+  enabled: boolean;
+  mode: NotrePublicMode | 'shadow';
+  intervened: boolean;
+  fallback_used: boolean;
+  input_before?: number;
+  input_sent?: number;
+  input_saved?: number;
+  value_usd?: number;
+  result?: 'optimized' | 'no_gain' | 'fallback';
+  /** Contract V3 shape fields (embeddings/rerank economy). */
+  shape?: 'chat' | 'embeddings' | 'rerank';
+  contract_version?: number;
+  saved_breakdown?: {
+    cache_hit_tokens?: number;
+    dedup_tokens?: number;
+    prefilter_tokens?: number;
+  };
+};
+
 export type ChatCompletionCreateParams = {
   model: CaedralModelId | (string & {});
   messages: ChatCompletionMessageParam[];
@@ -23,6 +50,8 @@ export type ChatCompletionCreateParams = {
   presence_penalty?: number;
   stop?: string | string[];
   user?: string;
+  /** Optional Notre platform optimization (additive; omit for existing behavior). */
+  notre?: NotreOptions;
 };
 
 export type ChatCompletionChoice = {
@@ -47,6 +76,8 @@ export type ChatCompletion = {
   model: string;
   choices: ChatCompletionChoice[];
   usage?: CompletionUsage;
+  /** Present when Notre ran on the request or `notre.telemetry` was true. */
+  notre?: NotrePublicMetadata;
 };
 
 export type ChatCompletionChunkChoice = {
@@ -64,6 +95,7 @@ export type ChatCompletionChunk = {
   created: number;
   model: string;
   choices: ChatCompletionChunkChoice[];
+  notre?: NotrePublicMetadata;
 };
 
 export type Model = {

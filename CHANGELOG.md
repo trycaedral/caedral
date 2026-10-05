@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.2.0 — 2026-08-31
+
+- Add optional `notre` request field (`mode: "off" | "auto"`, `telemetry?: boolean`) on chat completions
+- Add optional `notre` response metadata (`enabled`, `mode`, `intervened`, `fallback_used`) when `telemetry: true`
+- Export `NotreOptions`, `NotrePublicMetadata`, `NotrePublicMode` types
+- Golden contract parity tests (`tests/notre-contract.test.ts`)
+- Includes 2.1.0 embedding improvements (`input_type`, `encoding_format`, `caedral-embed-e1-small-v1` alias) not previously published to npm
+
 ## 2.1.0 — 2026-08-04
 
 - Add OpenRouter-ready embedding options: `input_type` and `encoding_format` on `EmbeddingCreateParams`

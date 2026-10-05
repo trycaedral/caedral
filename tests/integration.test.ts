@@ -3,6 +3,10 @@ import { Caedral, CaedralAPIError } from "../src/index.js";
 import { createTestApiKey, type TestKeyFixture } from "./helpers.js";
 import { hasLiveOpenRouter } from "./setup.js";
 
+/** Explicitly invalid key for the 401 path — never a real credential. */
+const INVALID_INTEGRATION_KEY = "invalid-integration-test-key";
+
+
 const BASE_URL = process.env.CAEDRAL_BASE_URL ?? "http://localhost:5001";
 const canRunIntegration =
   !!process.env.CAEDRAL_TEST_API_KEY || !!process.env.DATABASE_URL;
@@ -120,7 +124,7 @@ describe.skipIf(!canRunIntegration)("Caedral SDK integration", () => {
 
   it("throws CaedralAPIError for invalid API key", async () => {
     const badClient = new Caedral({
-      apiKey: "cd_live_invalid_integration_test_key",
+      apiKey: INVALID_INTEGRATION_KEY,
       baseURL: BASE_URL,
     });
 

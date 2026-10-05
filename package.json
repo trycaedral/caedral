@@ -1,6 +1,6 @@
 {
   "name": "caedral",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Official TypeScript/JavaScript client for the Caedral API \u2014 OpenAI-compatible chat completions, embeddings, images, audio, and rerank",
   "license": "MIT",
   "type": "module",
